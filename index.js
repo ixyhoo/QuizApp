@@ -52,3 +52,49 @@ class Quiz {
     return this.currentQuestionIndex >= this.questions.length;
   }
 }
+// quiz display
+const display = {
+  elementShown: function(id, text) {
+
+    let element = document.getElementById(id);
+    element.innerHTML = text;
+  }, 
+  question: function(){
+    this.elementShown("question", quiz.getCurrentQuestion().text);
+  },
+  choices: function(){
+    let choices = quiz.getCurrentQuestion().choices;
+
+    guessHandler = (id, guess) => {
+      document.getElementById(id).onclick = function(){
+        quiz.guess(guess);
+        quizApp();
+      };
+    };
+    //display choices and handle guess
+    for(let i = 0; i < choices.length; i++){
+      this.elementShown("choice" + i, choices[i]);
+      guessHandler("guess" + i, choices[i]);
+    }
+  },
+  progress: function(){
+    this.elementShown("progress",
+    `Question ${quiz.currentQuestionIndex + 1} sur ${quiz.questions.length} `
+    );
+  },
+};
+//game logic
+quizApp = () => {
+  if (quiz.hasEnded()){
+
+  } else {
+    display.question();
+    display.choices();
+    display.progress();
+  }
+    //display score
+  };
+
+//create quiz
+let quiz = new Quiz(questions);
+quizApp();
