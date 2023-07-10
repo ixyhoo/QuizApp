@@ -82,11 +82,19 @@ const display = {
     `Question ${quiz.currentQuestionIndex + 1} sur ${quiz.questions.length} `
     );
   },
+  endQuiz: function(){
+    endQuizHTML = `
+    <h1>Quiz terminé !</h1>
+    <h3>Votre score est de : ${quiz.score} / ${quiz.questions.length}</h3>
+    <button id="reset">Recommencer</button>
+    `;
+    this.elementShown("quiz", endQuizHTML);
+  }
 };
 //game logic
 quizApp = () => {
   if (quiz.hasEnded()){
-
+    display.endQuiz();
   } else {
     display.question();
     display.choices();
