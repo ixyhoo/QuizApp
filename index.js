@@ -95,6 +95,7 @@ const display = {
 quizApp = () => {
   if (quiz.hasEnded()){
     display.endQuiz();
+    display.endQuiz();
   } else {
     display.question();
     display.choices();
